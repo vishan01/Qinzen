@@ -13,6 +13,35 @@ const Background={
     fillRect:(0,0,canvas.width,canvas.height)
 }
 
+// floor collision 2d
+const floorCollision2D=[]
+for(let i=0;i<floorcollision.length;i+=36){
+    floorCollision2D.push(floorcollision.slice(i,i+36))
+}
+const collisionBlocks=[]
+floorCollision2D.forEach((row,y)=>{
+    row.forEach((tile,x)=>{
+        if(tile){
+            collisionBlocks.push(new collisionBlock(x*16,y*16))
+        }
+    })
+})
+
+
+// platform collision 2d
+const platformCollision2D=[]
+for(let i=0;i<platformcollision.length;i+=36){
+    platformCollision2D.push(platformcollision.slice(i,i+36))
+}
+const platformcollisionBlocks=[]
+platformCollision2D.forEach((row,y)=>{
+    row.forEach((tile,x)=>{
+        if(tile){
+            platformcollisionBlocks.push(new collisionBlock(x*16,y*16))
+        }
+    })
+})
+
 
 //Possible movements for player
 const keys={
@@ -21,56 +50,13 @@ const keys={
     ArrowRight:false
 }
 
-//Player Class + Gravity
-const gravity=0.25;
-class Player{
-    constructor(x=0,y=0){
-        this.position={x:x,y:y};
-        this.velocity={x:0,y:1};
-        this.height=50;
-        this.width=50;
-    }
-    draw(){
-        context.fillStyle='red';
-        context.fillRect(this.position.x,this.position.y,this.width,this.height);
-    }
-    update(){
-        this.draw();
-        this.position.y+=this.velocity.y;
-        if(this.position.y+this.height+this.velocity.y<canvas.height){
-            this.velocity.y+=gravity;
-        }else{
-            this.velocity.y=0;
-        }
-        
-    }
-}
-
-// Sprite Class
-class Sprite{
-    constructor(x=0,y=0,imgSrc=""){
-        this.position={x:x,y:y};
-        this.image=new Image();
-        this.image.src=imgSrc;
-    }
-    draw(){
-        if(!this.image) return
-        context.drawImage(this.image,this.position.x,this.position.y);
-    }
-    update(){
-        this.draw();
-    }
-}
-
-
+const gravity=0.6;
 
 //background Image
-const background=new Sprite(0,0,'./img/background.png');
-
-
+const background=new Sprite(0,0,'./img/qinzen.png');
 
 //player object
-const player=new Player();
+const player=new Player(x=100,y=0,collisionBlocks,platformcollisionBlocks);
 
 // Gravity Animation
 function animate(){
@@ -79,16 +65,19 @@ function animate(){
     context.fillStyle='teal';
     context.fillRect(0,0,canvas.width,canvas.height);
     context.save()
-    context.scale(4,4)
-    context.translate(0,(canvas.height/4)-background.image.height)
+    context.scale(3,3)
+    context.translate(0,(canvas.height/3)-background.image.height)
     background.update();
-    context.restore()
+    collisionBlocks.forEach(block=>{block.update()})
+    platformcollisionBlocks.forEach(block=>{block.update()})
     player.update();
-
+    context.restore()
+    
+    player.velocity.x=0;
     if(keys.ArrowRight){
-        player.position.x+=5;
+        player.velocity.x+=5;
     }else if(keys.ArrowLeft){
-        player.position.x-=5;
+        player.velocity.x-=5;
     }
 }
 
@@ -106,10 +95,10 @@ document.addEventListener('keydown',(event)=>{
             keys.ArrowLeft=true;
             break;
         case 'w':
-            player.velocity.y=-10;
+            player.velocity.y=-8;
             break;
         case 'ArrowUp':
-            player.velocity.y=-10;
+            player.velocity.y=-8;
             break;
         case 'ArrowRight':
             keys.ArrowRight=true;
