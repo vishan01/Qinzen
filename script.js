@@ -46,6 +46,29 @@ class Player{
     }
 }
 
+// Sprite Class
+class Sprite{
+    constructor(x=0,y=0,imgSrc=""){
+        this.position={x:x,y:y};
+        this.image=new Image();
+        this.image.src=imgSrc;
+    }
+    draw(){
+        if(!this.image) return
+        context.drawImage(this.image,this.position.x,this.position.y);
+    }
+    update(){
+        this.draw();
+    }
+}
+
+
+
+//background Image
+const background=new Sprite(0,0,'./img/background.png');
+
+
+
 //player object
 const player=new Player();
 
@@ -55,7 +78,13 @@ function animate(){
     window.requestAnimationFrame(animate);
     context.fillStyle='teal';
     context.fillRect(0,0,canvas.width,canvas.height);
+    context.save()
+    context.scale(4,4)
+    context.translate(0,(canvas.height/4)-background.image.height)
+    background.update();
+    context.restore()
     player.update();
+
     if(keys.ArrowRight){
         player.position.x+=5;
     }else if(keys.ArrowLeft){
