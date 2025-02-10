@@ -13,18 +13,28 @@ const Background={
     fillRect:(0,0,canvas.width,canvas.height)
 }
 
-//Player Class
+//Player Class + Gravity
+const gravity=0.1;
 class Player{
     constructor(x=0,y=0){
         this.position={x:x,y:y};
+        this.velocity={x:0,y:1};
+        this.height=50;
+        this.width=50;
     }
     draw(){
         context.fillStyle='red';
-        context.fillRect(this.position.x,this.position.y,50,50);
+        context.fillRect(this.position.x,this.position.y,this.width,this.height);
     }
     update(){
         this.draw();
-        this.position.y=this.position.y<canvas.height-50?this.position.y+=1:canvas.height-50;
+        this.position.y+=this.velocity.y;
+        if(this.position.y+this.height+this.velocity.y<canvas.height){
+            this.velocity.y+=gravity;
+        }else{
+            this.velocity.y=0;
+        }
+        
     }
 }
 
