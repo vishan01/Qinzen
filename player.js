@@ -1,24 +1,23 @@
-class Player{
+class Player extends Sprite{
     constructor(x=0,y=0,colosionBlocks,platformcollisionBlocks){
+        super(x,y,'./img/Samurai/Idle.png',6,5,0.5);
         this.position={x:x,y:y};
         this.velocity={x:0,y:1};
-        this.height=20;
-        this.width=20;
+
         this.colosionBlocks=colosionBlocks;
         this.platformcollisionBlocks=platformcollisionBlocks;
     }
-    draw(){
-        context.fillStyle='red';
-        context.fillRect(this.position.x,this.position.y,this.width,this.height);
-    }
+    
     update(){
+        context.fillStyle='rgba(59, 153, 40, 0.5)';
+        context.fillRect(this.position.x,this.position.y,this.width,this.height);
         this.draw();
         this.position.x+=this.velocity.x;
         
         this.checkHorizontalCollision();
         this.applyGravity();
         this.checkVerticalCollision();
-        
+        this.updateFrames();
     }
 
     applyGravity(){
