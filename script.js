@@ -56,11 +56,11 @@ const gravity=0.6;
 const background=new Sprite(0,0,'./img/qinzen.png');
 
 //player object
-const player=new Player(x=100,y=0,collisionBlocks,platformcollisionBlocks);
+const player=new Player(x=80,y=290,collisionBlocks,platformcollisionBlocks);
 
 // Gravity Animation
 function animate(){
-
+    
     window.requestAnimationFrame(animate);
     context.fillStyle='teal';
     context.fillRect(0,0,canvas.width,canvas.height);
@@ -76,9 +76,11 @@ function animate(){
     player.velocity.x=0;
     if(keys.ArrowRight){
         player.velocity.x+=5;
-    }else if(keys.ArrowLeft){
+    }
+    if(keys.ArrowLeft){
         player.velocity.x-=5;
     }
+    
 }
 
 animate()
