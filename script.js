@@ -56,7 +56,15 @@ const gravity=0.6;
 const background=new Sprite(0,0,'./img/qinzen.png');
 
 //player object
-const player=new Player(x=80,y=290,collisionBlocks,platformcollisionBlocks);
+const animations={
+    idle: {imageSrc:'./img/Samurai/Idle.png',frameRate:0},
+    run: {imageSrc:'./img/Samurai/Run.png',frameRate:0},
+    jump: {imageSrc:'./img/Samurai/Jump.png',frameRate:0},
+    fall: {imageSrc:'./img/Samurai/Fall.png',frameRate:0},
+}
+
+
+const player=new Player(x=80,y=290,collisionBlocks,platformcollisionBlocks,animations);
 
 // Gravity Animation
 function animate(){
