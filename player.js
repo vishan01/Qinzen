@@ -8,8 +8,22 @@ class Player extends Sprite{
         this.platformcollisionBlocks=platformcollisionBlocks;
         
         this.animation=animations
+        for(let key in this.animation){
+            this.animation[key].image=new Image();
+            this.animation[key].image.src=this.animation[key].imageSrc;
+           
+        }
     }
     
+    switchSprite(key){
+        if(this.image==this.animation[key].image) return;
+        this.currentFrame=0;
+        this.image=this.animation[key].image;
+        this.frameRate=this.animation[key].frameRate;
+        this.frameBuffer=this.animation[key].frameBuffer;
+    }
+
+
     update(){
         this.updateFrames();
         this.updateHitBox();
@@ -70,6 +84,31 @@ class Player extends Sprite{
             }
             }
         }
+
+
+        // Platform collision blocks
+        for(let i=0;i<this.platformcollisionBlocks.length;i++){
+            let block=this.platformcollisionBlocks[i];
+            if(this.hitBox.y+this.hitBox.height>=block.position.y //top of block
+                && 
+                this.hitBox.y+this.hitBox.height<=block.position.y+block.height //bottom of block
+                && 
+                this.hitBox.x+this.hitBox.width>=block.position.x //left of block
+                && 
+                this.hitBox.x<=block.position.x+block.width//right of block
+                ){
+                    
+                
+                if(this.velocity.y>0){
+                this.velocity.y=0;
+                const offset=this.position.y+this.height-(this.hitBox.y+this.hitBox.height);
+                this.position.y=block.position.y-this.height+offset-0.01;
+                    break;
+            }
+            }
+        }
+
+
     }
 
     checkHorizontalCollision(){
@@ -99,6 +138,11 @@ class Player extends Sprite{
             }
             }
         }
+
+       
+
+
+
     }
 
 
