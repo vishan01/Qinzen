@@ -37,7 +37,7 @@ const platformcollisionBlocks=[]
 platformCollision2D.forEach((row,y)=>{
     row.forEach((tile,x)=>{
         if(tile){
-            platformcollisionBlocks.push(new collisionBlock(x*16,y*16))
+            platformcollisionBlocks.push(new collisionBlock(x*16,y*16,10))
         }
     })
 })
@@ -50,17 +50,17 @@ const keys={
     ArrowRight:false
 }
 
-const gravity=0.6;
+const gravity=0.3;
 
 //background Image
 const background=new Sprite(0,0,'./img/qinzen.png');
 
 //player object
 const animations={
-    idle: {imageSrc:'./img/Samurai/Idle.png',frameRate:0},
-    run: {imageSrc:'./img/Samurai/Run.png',frameRate:0},
-    jump: {imageSrc:'./img/Samurai/Jump.png',frameRate:0},
-    fall: {imageSrc:'./img/Samurai/Fall.png',frameRate:0},
+    idle: {imageSrc:'./img/Samurai/Idle.png',frameRate:6,frameBuffer:5},
+    run: {imageSrc:'./img/Samurai/Run.png',frameRate:8, frameBuffer:4},
+    jump: {imageSrc:'./img/Samurai/Jump.png',frameRate:12,frameBuffer:4},
+    fall: {imageSrc:'./img/Samurai/Fall.png',frameRate:4},
 }
 
 
@@ -83,12 +83,21 @@ function animate(){
     
     player.velocity.x=0;
     if(keys.ArrowRight){
-        player.velocity.x+=5;
+        player.switchSprite('run');
+        player.velocity.x+=3;
     }
-    if(keys.ArrowLeft){
-        player.velocity.x-=5;
+    else if(keys.ArrowLeft){
+        player.velocity.x-=3;
     }
-    
+    else if(player.velocity.y==0){
+        player.switchSprite('idle');
+    }
+
+    if(player.velocity.y<0){
+        player.switchSprite('jump');
+
+    }
+
 }
 
 animate()
@@ -105,10 +114,10 @@ document.addEventListener('keydown',(event)=>{
             keys.ArrowLeft=true;
             break;
         case 'w':
-            player.velocity.y=-8;
+            player.velocity.y=-6;
             break;
         case 'ArrowUp':
-            player.velocity.y=-8;
+            player.velocity.y=-6;
             break;
         case 'ArrowRight':
             keys.ArrowRight=true;
