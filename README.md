@@ -2,7 +2,10 @@
 
 ## Description
 
-Qinzen is a 2D platformer game developed using JavaScript and HTML5 Canvas. The game features a samurai character that can run, jump, and attack. The game world includes collision blocks and platform collision blocks for realistic movement and interactions. The camera follows the player, panning left and right as the player moves through the level.
+Qinzen is a 2D platformer game developed using JavaScript and HTML5 Canvas. 
+The game features a samurai character that can run, jump, and attack. 
+The game world includes collision blocks and platform collision blocks for realistic movement and interactions.
+The camera follows the player, panning left and right as the player moves through the level.
 
 ## File Structure
 
