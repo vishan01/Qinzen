@@ -72,11 +72,13 @@ const animations={
 
 const player=new Player(x=80,y=290,collisionBlocks,platformcollisionBlocks,animations);
 
-
+// camera object
 const camera={
     position:{x:0,y:(canvas.height/3)-432}
 }
 
+
+// direction of character 
 const direction={
     right:true,
 }
