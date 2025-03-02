@@ -51,6 +51,9 @@ To play the game, open `index.html` in a web browser.
 -   **Camera**: The camera follows the player horizontally, panning as the player moves. The camera's position is updated in the `animate` function in [`script.js`](script.js).
 -   **Sprites**: The [`sprite.js`](sprite.js) file contains the `Sprite` class, which is used to load and draw images.  The player's animations are implemented using sprite sheets located in the `img/Samurai/` directory.
 
+## Website
+[vishan.me](https://vishan.me/Qinzen)
+
 ## Assets
 
 All image assets, including the background and samurai animations, are stored in the `img/` directory. The map data is stored in `data/map.js`.
