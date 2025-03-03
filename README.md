@@ -52,6 +52,7 @@ To play the game, open `index.html` in a web browser.
 -   **Sprites**: The [`sprite.js`](sprite.js) file contains the `Sprite` class, which is used to load and draw images.  The player's animations are implemented using sprite sheets located in the `img/Samurai/` directory.
 
 ## Website
+visit the link given below to view my portfolio as well as the game
 [vishan.me](https://vishan.me/Qinzen)
 
 ## Assets
