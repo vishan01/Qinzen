@@ -1,3 +1,4 @@
+// player class denoting the animation and collision of the player
 class Player extends Sprite{
     constructor(x=0,y=0,colosionBlocks,platformcollisionBlocks,animations){
         super(x,y,'./img/Samurai/Idle.png',6,5,0.5);
