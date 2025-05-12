@@ -69,7 +69,7 @@ const animations={
     attackleft: {imageSrc:'./img/Samurai/Attack_3_Left.png',frameRate:3,frameBuffer:2},
 }
 
-
+// new player object
 const player=new Player(x=80,y=290,collisionBlocks,platformcollisionBlocks,animations);
 
 // camera object
