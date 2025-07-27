@@ -53,7 +53,7 @@ To play the game, open `index.html` in a web browser.
 
 ## Website
 visit the link given below to view my portfolio as well as the game
-[vishan.me](https://vishan.me/Qinzen)
+[vishan.me/Qinzen](https://vishan.me/Qinzen)
 
 ## Assets
 
